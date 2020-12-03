@@ -1,0 +1,10 @@
+(library
+  (name Aoc)
+  (public_name aoc)
+  (ocamlc_flags -w -9-27)
+  (ocamlopt_flags -linkall -w -9-27)
+  (libraries
+    bread
+  )
+)
+(include_subdirs unqualified)

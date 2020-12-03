@@ -1,0 +1,9 @@
+{
+  "source": "./package.json",
+  "override": {
+    "build": "refmterr dune build -p aoc,exe",
+    "install": [
+      "esy-installer exe.install"
+    ]
+  }
+}

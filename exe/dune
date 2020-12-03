@@ -1,0 +1,13 @@
+(executable
+  (name Exe)
+  (public_name exe)
+  (package exe)
+  (ocamlc_flags -w -9-27)
+  (ocamlopt_flags -w -9-27)
+  (libraries
+    bread
+    aoc
+  )  
+)
+
+(include_subdirs unqualified)
