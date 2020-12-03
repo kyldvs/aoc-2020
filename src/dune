@@ -5,6 +5,8 @@
   (ocamlopt_flags -linkall -w -9-27)
   (libraries
     bread
+    fp
+    fs.lib
   )
 )
 (include_subdirs unqualified)
