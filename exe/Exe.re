@@ -1,3 +1,3 @@
 open Aoc;
 
-Day2.run();
+Day1.run();
