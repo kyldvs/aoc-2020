@@ -1,4 +1,4 @@
-let part1 = (lines) => {
+let part1 = lines => {
   let n = Array.length(lines);
   let count = ref(0);
   for (r in 0 to n - 1) {
@@ -11,7 +11,7 @@ let part1 = (lines) => {
   count^;
 };
 
-let part2 = (lines) => {
+let part2 = lines => {
   let n = Array.length(lines);
 
   let s11 = ref(0);
@@ -23,23 +23,23 @@ let part2 = (lines) => {
   for (r in 0 to n - 1) {
     let m = String.length(lines[r]);
 
-    if (lines[r].[(r * 1) mod m] === '#') {
+    if (lines[r].[r * 1 mod m] === '#') {
       incr(s11);
     };
 
-    if (lines[r].[(r * 3) mod m] === '#') {
+    if (lines[r].[r * 3 mod m] === '#') {
       incr(s31);
     };
 
-    if (lines[r].[(r * 5) mod m] === '#') {
+    if (lines[r].[r * 5 mod m] === '#') {
       incr(s51);
     };
 
-    if (lines[r].[(r * 7) mod m] === '#') {
+    if (lines[r].[r * 7 mod m] === '#') {
       incr(s71);
     };
 
-    if (r mod 2 === 0 && lines[r].[(r / 2) mod m] === '#') {
+    if (r mod 2 === 0 && lines[r].[r / 2 mod m] === '#') {
       incr(s12);
     };
   };

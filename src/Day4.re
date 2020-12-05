@@ -1,6 +1,6 @@
 let skip_token = "SKIPXXXABCDEFGH";
 
-let part1 = (lines) => {
+let part1 = lines => {
   let lines = Array.to_list(lines);
   let lines = List.map(s => s == "" ? skip_token : s, lines);
   let s = Scanner.make(lines);
@@ -15,11 +15,10 @@ let part1 = (lines) => {
   let pid = ref(false);
   let cid = ref(false);
 
-  let check = () => {
+  let check = () =>
     if (byr^ && iyr^ && eyr^ && hgt^ && hcl^ && ecl^ && pid^) {
       incr(valid);
     };
-  };
 
   let reset = () => {
     byr := false;
@@ -40,15 +39,15 @@ let part1 = (lines) => {
     } else {
       let _value = Scanner.nextString(s);
       switch (field) {
-      | "byr" => byr := true;
-      | "iyr" => iyr := true;
-      | "eyr" => eyr := true;
-      | "hgt" => hgt := true;
-      | "hcl" => hcl := true;
-      | "ecl" => ecl := true;
-      | "pid" => pid := true;
-      | "cid" => cid := true;
-      | _ => ();
+      | "byr" => byr := true
+      | "iyr" => iyr := true
+      | "eyr" => eyr := true
+      | "hgt" => hgt := true
+      | "hcl" => hcl := true
+      | "ecl" => ecl := true
+      | "pid" => pid := true
+      | "cid" => cid := true
+      | _ => ()
       };
     };
   };
@@ -56,7 +55,7 @@ let part1 = (lines) => {
   valid^;
 };
 
-let part2 = (lines) => {
+let part2 = lines => {
   let lines = Array.to_list(lines);
   let lines = List.map(s => s == "" ? skip_token : s, lines);
   let s = Scanner.make(lines);
@@ -71,37 +70,41 @@ let part2 = (lines) => {
   let pid = ref(false);
   let cid = ref(false);
 
-  let valid_byr = (s) => {
+  let valid_byr = s => {
     let n = String.length(s);
-    let i = try (int_of_string(s)) {
-    | _ => -1;
-    };
+    let i =
+      try(int_of_string(s)) {
+      | _ => (-1)
+      };
     n === 4 && i >= 1920 && i <= 2002;
   };
 
-  let valid_iyr = (s) => {
+  let valid_iyr = s => {
     let n = String.length(s);
-    let i = try (int_of_string(s)) {
-    | _ => -1;
-    };
+    let i =
+      try(int_of_string(s)) {
+      | _ => (-1)
+      };
     n === 4 && i >= 2010 && i <= 2020;
   };
 
-  let valid_eyr = (s) => {
+  let valid_eyr = s => {
     let n = String.length(s);
-    let i = try (int_of_string(s)) {
-    | _ => -1;
-    };
+    let i =
+      try(int_of_string(s)) {
+      | _ => (-1)
+      };
     n === 4 && i >= 2020 && i <= 2030;
   };
 
-  let valid_hgt = (s) => {
+  let valid_hgt = s => {
     module String = Bread.String;
     let lastTwo = String.sliceToEnd(-2, s);
     let front = String.slice(0, -2, s);
-    let i = try (int_of_string(front)) {
-    | _ => -1;
-    };
+    let i =
+      try(int_of_string(front)) {
+      | _ => (-1)
+      };
     switch (lastTwo) {
     | "in" => i >= 59 && i <= 76
     | "cm" => i >= 150 && i <= 193
@@ -109,7 +112,7 @@ let part2 = (lines) => {
     };
   };
 
-  let valid_hcl = (s) => {
+  let valid_hcl = s => {
     let n = String.length(s);
     if (n === 7) {
       let valid = ref(true);
@@ -134,8 +137,8 @@ let part2 = (lines) => {
           | 'c'
           | 'd'
           | 'e'
-          | 'f' => true;
-          | _ => false;
+          | 'f' => true
+          | _ => false
           };
         if (!okay) {
           valid := false;
@@ -147,7 +150,7 @@ let part2 = (lines) => {
     };
   };
 
-  let valid_ecl = (s) => {
+  let valid_ecl = s => {
     switch (s) {
     | "amb"
     | "blu"
@@ -155,24 +158,24 @@ let part2 = (lines) => {
     | "gry"
     | "grn"
     | "hzl"
-    | "oth" => true;
-    | _ => false;
+    | "oth" => true
+    | _ => false
     };
   };
 
-  let valid_pid = (s) => {
+  let valid_pid = s => {
     let n = String.length(s);
-    let i = try (int_of_string(s)) {
-    | _ => -1;
-    };
+    let i =
+      try(int_of_string(s)) {
+      | _ => (-1)
+      };
     n === 9 && i !== (-1);
   };
 
-  let check = () => {
+  let check = () =>
     if (byr^ && iyr^ && eyr^ && hgt^ && hcl^ && ecl^ && pid^) {
       incr(valid);
     };
-  };
 
   let reset = () => {
     byr := false;
@@ -197,39 +200,39 @@ let part2 = (lines) => {
         if (valid_byr(value)) {
           byr := true;
           ();
-        };
+        }
       | "iyr" =>
         if (valid_iyr(value)) {
           iyr := true;
           ();
-        };
+        }
       | "eyr" =>
         if (valid_eyr(value)) {
           eyr := true;
           ();
-        };
+        }
       | "hgt" =>
         if (valid_hgt(value)) {
           hgt := true;
           ();
-        };
+        }
       | "hcl" =>
         if (valid_hcl(value)) {
           hcl := true;
           ();
-        };
+        }
       | "ecl" =>
         if (valid_ecl(value)) {
           ecl := true;
           ();
-        };
+        }
       | "pid" =>
         if (valid_pid(value)) {
           pid := true;
           ();
-        };
-      | "cid" => cid := true;
-      | _ => ();
+        }
+      | "cid" => cid := true
+      | _ => ()
       };
     };
   };

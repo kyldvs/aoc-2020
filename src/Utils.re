@@ -10,8 +10,8 @@ let root =
   |> Filename.dirname
   |> Fp.absoluteExn;
 
-let getInput = (day) => {
-  let file = Fp.At.(root / "input" / ("day" ++ string_of_int(day) ++ ".in"))
+let getInput = day => {
+  let file = Fp.At.(root / "input" / ("day" ++ string_of_int(day) ++ ".in"));
   let lines = Fs.readTextExn(file);
   let lines = Array.of_list(lines);
   lines;
