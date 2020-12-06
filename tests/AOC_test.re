@@ -1,13 +1,7 @@
 open Aoc;
 open TestFramework;
 
-describe("Example", ({test}) => {
-  test("1", ({expect}) => {
-    let actual = 42;
-    let expected = 42;
-    expect.int(actual).toBe(expected);
-  });
-
+describe("Past Days", ({test}) => {
   test("Day 01", ({expect}) => {
     let lines = Utils.getInput("01");
     expect.int(Day01.part1(lines)).toBe(926464);
