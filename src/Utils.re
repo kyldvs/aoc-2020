@@ -11,15 +11,7 @@ let root =
   |> Fp.absoluteExn;
 
 let getInput = day => {
-  let file = Fp.At.(root / "input" / ("day" ++ string_of_int(day) ++ ".in"));
-  let lines = Fs.readTextExn(file);
-  let lines = Array.of_list(lines);
-  lines;
-};
-
-let getTestInput = day => {
-  let file =
-    Fp.At.(root / "input" / ("day" ++ string_of_int(day) ++ ".test.in"));
+  let file = Fp.At.(root / "input" / ("day" ++ day ++ ".in"));
   let lines = Fs.readTextExn(file);
   let lines = Array.of_list(lines);
   lines;
