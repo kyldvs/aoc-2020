@@ -16,3 +16,11 @@ let getInput = day => {
   let lines = Array.of_list(lines);
   lines;
 };
+
+let getTestInput = day => {
+  let file =
+    Fp.At.(root / "input" / ("day" ++ string_of_int(day) ++ ".test.in"));
+  let lines = Fs.readTextExn(file);
+  let lines = Array.of_list(lines);
+  lines;
+};

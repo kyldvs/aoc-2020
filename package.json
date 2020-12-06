@@ -6,9 +6,9 @@
   "esy": {
     "build": "refmterr dune build -p aoc"
   },
-  "scripts": {    
+  "scripts": {
     "format": "esy dune build @fmt --auto-promote",
-    "test": "esy '@test' x test",
+    "test": "esy '@test' x test_exe",
     "exe": "esy '@exe' x exe"
   },
   "dependencies": {
