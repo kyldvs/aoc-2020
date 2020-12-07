@@ -1,5 +1,5 @@
 {
-  "checksum": "23bc13cfe2191a19437253949bb8a739",
+  "checksum": "40e8725cf8bc5f384906dc3fa1bbb4b4",
   "root": "aoc@link-dev:./package.json",
   "node": {
     "refmterr@3.3.2@d41d8cd9": {
@@ -69,7 +69,7 @@
         "@reason-native/console@0.1.0@d41d8cd9",
         "@reason-native/cli@github:ManasJayanth/reason-native:cli.json#1240e2757a9685473280b9543f6ae2d8bd53c552@d41d8cd9",
         "@opam/dune@opam:2.7.1@f5f493bc", "@esy-ocaml/reason@3.6.2@d41d8cd9",
-        "@chess-tea/bread@github:chess-tea/bread#78c77e9d8964f2118c5a9b2ebb9e017e14b9c05b@d41d8cd9"
+        "@chess-tea/bread@github:chess-tea/bread:package.json#30ef496@d41d8cd9"
       ],
       "devDependencies": [
         "refmterr@3.3.2@d41d8cd9",
@@ -1163,17 +1163,14 @@
       ],
       "devDependencies": []
     },
-    "@chess-tea/bread@github:chess-tea/bread#78c77e9d8964f2118c5a9b2ebb9e017e14b9c05b@d41d8cd9": {
+    "@chess-tea/bread@github:chess-tea/bread:package.json#30ef496@d41d8cd9": {
       "id":
-        "@chess-tea/bread@github:chess-tea/bread#78c77e9d8964f2118c5a9b2ebb9e017e14b9c05b@d41d8cd9",
+        "@chess-tea/bread@github:chess-tea/bread:package.json#30ef496@d41d8cd9",
       "name": "@chess-tea/bread",
-      "version":
-        "github:chess-tea/bread#78c77e9d8964f2118c5a9b2ebb9e017e14b9c05b",
+      "version": "github:chess-tea/bread:package.json#30ef496",
       "source": {
         "type": "install",
-        "source": [
-          "github:chess-tea/bread#78c77e9d8964f2118c5a9b2ebb9e017e14b9c05b"
-        ]
+        "source": [ "github:chess-tea/bread:package.json#30ef496" ]
       },
       "overrides": [],
       "dependencies": [
