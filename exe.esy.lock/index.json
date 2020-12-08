@@ -1,5 +1,5 @@
 {
-  "checksum": "de80781076a7598e6c3101e722d247e3",
+  "checksum": "2389830151b919e8e06210d25cadbf77",
   "root": "aoc@link-dev:./package.json",
   "node": {
     "refmterr@3.3.2@d41d8cd9": {
@@ -69,11 +69,11 @@
         "@reason-native/console@0.1.0@d41d8cd9",
         "@reason-native/cli@github:ManasJayanth/reason-native:cli.json#1240e2757a9685473280b9543f6ae2d8bd53c552@d41d8cd9",
         "@opam/dune@opam:2.7.1@f5f493bc", "@esy-ocaml/reason@3.6.2@d41d8cd9",
-        "@chess-tea/bread@github:chess-tea/bread:package.json#d58285f@d41d8cd9"
+        "@chess-tea/bread@github:chess-tea/bread:package.json#9137239@d41d8cd9"
       ],
       "devDependencies": [
         "refmterr@3.3.2@d41d8cd9",
-        "@opam/ocaml-lsp-server@github:ocaml/ocaml-lsp:ocaml-lsp-server.opam#23546b370cfb534ae3b095a29319f7f09a41435e@d41d8cd9",
+        "@opam/ocaml-lsp-server@github:ocaml/ocaml-lsp:ocaml-lsp-server.opam#f3df193fb22c17c52cf4c9be990c8e81f9ccb070@d41d8cd9",
         "@opam/merlin@opam:3.4.2@9a4d1fd4"
       ]
     },
@@ -571,16 +571,16 @@
       ],
       "devDependencies": [ "ocaml@4.9.1000@d41d8cd9" ]
     },
-    "@opam/ocaml-lsp-server@github:ocaml/ocaml-lsp:ocaml-lsp-server.opam#23546b370cfb534ae3b095a29319f7f09a41435e@d41d8cd9": {
+    "@opam/ocaml-lsp-server@github:ocaml/ocaml-lsp:ocaml-lsp-server.opam#f3df193fb22c17c52cf4c9be990c8e81f9ccb070@d41d8cd9": {
       "id":
-        "@opam/ocaml-lsp-server@github:ocaml/ocaml-lsp:ocaml-lsp-server.opam#23546b370cfb534ae3b095a29319f7f09a41435e@d41d8cd9",
+        "@opam/ocaml-lsp-server@github:ocaml/ocaml-lsp:ocaml-lsp-server.opam#f3df193fb22c17c52cf4c9be990c8e81f9ccb070@d41d8cd9",
       "name": "@opam/ocaml-lsp-server",
       "version":
-        "github:ocaml/ocaml-lsp:ocaml-lsp-server.opam#23546b370cfb534ae3b095a29319f7f09a41435e",
+        "github:ocaml/ocaml-lsp:ocaml-lsp-server.opam#f3df193fb22c17c52cf4c9be990c8e81f9ccb070",
       "source": {
         "type": "install",
         "source": [
-          "github:ocaml/ocaml-lsp:ocaml-lsp-server.opam#23546b370cfb534ae3b095a29319f7f09a41435e"
+          "github:ocaml/ocaml-lsp:ocaml-lsp-server.opam#f3df193fb22c17c52cf4c9be990c8e81f9ccb070"
         ]
       },
       "overrides": [],
@@ -1163,14 +1163,14 @@
       ],
       "devDependencies": []
     },
-    "@chess-tea/bread@github:chess-tea/bread:package.json#d58285f@d41d8cd9": {
+    "@chess-tea/bread@github:chess-tea/bread:package.json#9137239@d41d8cd9": {
       "id":
-        "@chess-tea/bread@github:chess-tea/bread:package.json#d58285f@d41d8cd9",
+        "@chess-tea/bread@github:chess-tea/bread:package.json#9137239@d41d8cd9",
       "name": "@chess-tea/bread",
-      "version": "github:chess-tea/bread:package.json#d58285f",
+      "version": "github:chess-tea/bread:package.json#9137239",
       "source": {
         "type": "install",
-        "source": [ "github:chess-tea/bread:package.json#d58285f" ]
+        "source": [ "github:chess-tea/bread:package.json#9137239" ]
       },
       "overrides": [],
       "dependencies": [
