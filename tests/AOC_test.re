@@ -8,16 +8,34 @@ describe("Past Days", ({test}) => {
     expect.int(Day01.part2(lines)).toBe(65656536);
   });
 
+  test("Day01Clean", ({expect}) => {
+    let lines = Utils.getInput("01");
+    expect.int(Day01Clean.part1(lines)).toBe(926464);
+    expect.int(Day01Clean.part2(lines)).toBe(65656536);
+  });
+
   test("Day02", ({expect}) => {
     let lines = Utils.getInput("02");
     expect.int(Day02.part1(lines)).toBe(416);
     expect.int(Day02.part2(lines)).toBe(688);
   });
 
+  test("Day02Clean", ({expect}) => {
+    let lines = Utils.getInput("02");
+    expect.int(Day02Clean.part1(lines)).toBe(416);
+    expect.int(Day02Clean.part2(lines)).toBe(688);
+  });
+
   test("Day03", ({expect}) => {
     let lines = Utils.getInput("03");
     expect.int(Day03.part1(lines)).toBe(268);
     expect.int(Day03.part2(lines)).toBe(3093068400);
+  });
+
+  test("Day03Clean", ({expect}) => {
+    let lines = Utils.getInput("03");
+    expect.int(Day03Clean.part1(lines)).toBe(268);
+    expect.int(Day03Clean.part2(lines)).toBe(3093068400);
   });
 
   test("Day04", ({expect}) => {

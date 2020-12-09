@@ -30,3 +30,19 @@ let skipBlankLinesArr = lines => {
   let lines = Array.of_list(lines);
   lines;
 };
+
+let count = (fn, data) => {
+  let answer = ref(0);
+  let n = Array.length(data);
+  for (i in 0 to n - 1) {
+    if (fn(data[i])) {
+      incr(answer);
+    };
+  };
+  answer^;
+};
+
+let countList = (fn, data) => {
+  let arr = Array.of_list(data);
+  count(fn, arr);
+};

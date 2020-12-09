@@ -4,22 +4,33 @@ open Bread;
  * Input preparation *
  *********************/
 
-type data = {
-  raw: string,
-  value: int,
-};
-
 let prepareLine = line => {
-  let line = String.replaceAll("foo", "foo", line);
-  switch (String.split("dummytoken", line)) {
-  | [part1] => {raw: line, value: (-1)}
-  | _ => failwith("Invalid input")
-  };
+  (line, String.length(line));
 };
 
 let prepareInput = lines => {
   let lines = Array.map(prepareLine, lines);
   (lines, Array.length(lines));
+};
+
+let isTree = (i, line) => {
+  let (raw, n) = line;
+  raw.[i mod n] === '#';
+};
+
+let traverse = (dx, dy, lines) => {
+  let n = Array.length(lines);
+  let count = ref(0);
+  let x = ref(0);
+  let y = ref(0);
+  while (y^ < n) {
+    if (isTree(x^, lines[y^])) {
+      incr(count);
+    };
+    x := x^ + dx;
+    y := y^ + dy;
+  };
+  count^;
 };
 
 /*******************
@@ -28,13 +39,7 @@ let prepareInput = lines => {
 
 let part1 = lines => {
   let (data, _) = prepareInput(lines);
-  Utils.count(
-    ({raw}) => {
-      ();
-      true;
-    },
-    data,
-  );
+  traverse(3, 1, data);
 };
 
 /*******************
@@ -43,13 +48,11 @@ let part1 = lines => {
 
 let part2 = lines => {
   let (data, _) = prepareInput(lines);
-  Utils.count(
-    ({raw}) => {
-      ();
-      true;
-    },
-    data,
-  );
+  traverse(1, 1, data)
+  * traverse(3, 1, data)
+  * traverse(5, 1, data)
+  * traverse(7, 1, data)
+  * traverse(1, 2, data);
 };
 
 /*****************
@@ -57,7 +60,7 @@ let part2 = lines => {
  *****************/
 
 let run = () => {
-  let lines = Utils.getInput("02");
+  let lines = Utils.getInput("03");
   Printf.printf("Part 1: %d\n", part1(lines));
   Printf.printf("Part 2: %d\n", part2(lines));
 };
