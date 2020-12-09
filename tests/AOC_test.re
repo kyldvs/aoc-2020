@@ -44,6 +44,12 @@ describe("Past Days", ({test}) => {
     expect.int(Day04.part2(lines)).toBe(172);
   });
 
+  test("Day04Clean", ({expect}) => {
+    let lines = Utils.getInput("04");
+    expect.int(Day04Clean.part1(lines)).toBe(237);
+    expect.int(Day04Clean.part2(lines)).toBe(172);
+  });
+
   test("Day05", ({expect}) => {
     let lines = Utils.getInput("05");
     expect.int(Day05.part1(lines)).toBe(866);

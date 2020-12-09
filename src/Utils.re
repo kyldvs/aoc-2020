@@ -46,3 +46,27 @@ let countList = (fn, data) => {
   let arr = Array.of_list(data);
   count(fn, arr);
 };
+
+let groupInput = lines => {
+  let isSeparator = line => line == "";
+  let n = Array.length(lines);
+  let all = ref([]);
+  let curr = ref([]);
+  for (i in 0 to n - 1) {
+    if (isSeparator(lines[i])) {
+      all := [List.rev(curr^), ...all^];
+      curr := [];
+    } else {
+      curr := [lines[i], ...curr^];
+    };
+  };
+  let () =
+    switch (curr^) {
+    | [] => ()
+    | _ => all := [List.rev(curr^), ...all^]
+    };
+  let listOfLists = List.rev(all^);
+  let listOfArrays = List.map(Array.of_list, listOfLists);
+  let arrayOfArrays = Array.of_list(listOfArrays);
+  arrayOfArrays;
+};
