@@ -4,17 +4,8 @@ open Bread;
  * Input preparation *
  *********************/
 
-type data = {
-  raw: string,
-  value: int,
-};
-
 let prepareLine = line => {
-  let line = String.replaceAll("foo", "foo", line);
-  switch (String.split("dummytoken", line)) {
-  | [part1] => {raw: line, value: (-1)}
-  | _ => failwith("Invalid input")
-  };
+  int_of_string(line);
 };
 
 let prepareInput = lines => {
@@ -27,14 +18,25 @@ let prepareInput = lines => {
  *******************/
 
 let part1 = lines => {
-  let (data, _) = prepareInput(lines);
-  Utils.count(
-    ({raw}) => {
-      ();
-      true;
-    },
-    data,
-  );
+  let (data, n) = prepareInput(lines);
+  let i = ref(25);
+  let break = ref(false);
+  while (! break^) {
+    let valid = ref(false);
+    for (j in i^ - 25 to i^ - 1) {
+      for (k in j + 1 to i^ - 1) {
+        if (data[j] + data[k] === data[i^]) {
+          valid := true;
+        };
+      };
+    };
+    if (valid^) {
+      incr(i);
+    } else {
+      break := true;
+    };
+  };
+  data[i^];
 };
 
 /*******************
@@ -42,14 +44,43 @@ let part1 = lines => {
  *******************/
 
 let part2 = lines => {
-  let (data, _) = prepareInput(lines);
-  Utils.count(
-    ({raw}) => {
-      ();
-      true;
-    },
-    data,
-  );
+  let (data, n) = prepareInput(lines);
+  let sum = 50047984;
+  let test = (i, j) => {
+    let value = ref(0);
+    for (x in i to j) {
+      value := value^ + data[x];
+    };
+    value^;
+  };
+  let min = (i, j) => {
+    let value = ref(data[i]);
+    for (x in i + 1 to j) {
+      if (data[x] < value^) {
+        value := data[x];
+      };
+    };
+    value^;
+  };
+  let max = (i, j) => {
+    let value = ref(data[i]);
+    for (x in i + 1 to j) {
+      if (data[x] > value^) {
+        value := data[x];
+      };
+    };
+    value^;
+  };
+  let ans = ref(-1);
+
+  for (i in 0 to n - 1) {
+    for (j in i + 1 to n - 1) {
+      if (test(i, j) === sum) {
+        ans := min(i, j) + max(i, j);
+      }
+    }
+  }
+  ans^;
 };
 
 /*****************
