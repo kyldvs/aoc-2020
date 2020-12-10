@@ -22,6 +22,18 @@ let prepareInput = lines => {
   (lines, Array.length(lines));
 };
 
+let prepareGroup = group => {
+  let _arr = group;
+  let list = Array.to_list(group);
+  list;
+};
+
+let prepareInput2 = lines => {
+  let groups = Utils.groupInput(lines);
+  let data = Array.map(prepareGroup, groups);
+  (data, Array.length(data));
+};
+
 /*******************
  * Part 1 Solution *
  *******************/
@@ -57,7 +69,7 @@ let part2 = lines => {
  *****************/
 
 let run = () => {
-  let lines = Utils.getInput("02");
+  let lines = Utils.getInput("10");
   Printf.printf("Part 1: %d\n", part1(lines));
   Printf.printf("Part 2: %d\n", part2(lines));
 };
