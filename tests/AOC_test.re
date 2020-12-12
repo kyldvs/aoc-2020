@@ -85,4 +85,16 @@ describe("Past Days", ({test}) => {
     expect.int(Day09.part1(lines)).toBe(50047984);
     expect.int(Day09.part2(lines)).toBe(5407707);
   });
+
+  test("Day10", ({expect}) => {
+    let lines = Utils.getInput("10");
+    expect.int(Day10.part1(lines)).toBe(2277);
+    expect.int(Day10.part2(lines)).toBe(37024595836928);
+  });
+
+  test("Day11", ({expect}) => {
+    let lines = Utils.getInput("11");
+    expect.int(Day11.part1(lines)).toBe(2273);
+    expect.int(Day11.part2(lines)).toBe(2064);
+  });
 });
