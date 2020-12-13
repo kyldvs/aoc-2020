@@ -57,7 +57,7 @@ let part2 = lines => {
  *****************/
 
 let run = () => {
-  let lines = Utils.getInput("10");
+  let lines = Utils.getInput("13");
   Printf.printf("Part 1: %d\n", part1(lines));
   Printf.printf("Part 2: %d\n", part2(lines));
 };
