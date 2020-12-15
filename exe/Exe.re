@@ -1,3 +1,3 @@
 open Aoc;
 
-Day13Clean.run();
+Day14.run();
