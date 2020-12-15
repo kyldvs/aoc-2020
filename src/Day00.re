@@ -4,34 +4,22 @@ open Bread;
  * Input preparation *
  *********************/
 
-type data = {
-  raw: string,
-  value: int,
-};
-
-let prepareLine = line => {
-  let line = String.replaceAll("foo", "foo", line);
-  switch (String.split("dummytoken", line)) {
-  | [part1] => {raw: line, value: (-1)}
-  | _ => failwith("Invalid input")
+module Input = {
+  let eachLine = (fn, lines) => {
+    let lines = Array.map(fn, lines);
+    (lines, Array.length(lines));
   };
-};
 
-let prepareInput = lines => {
-  let lines = Array.map(prepareLine, lines);
-  (lines, Array.length(lines));
-};
+  let ints = (lines) => {
+    let lines = Array.map(int_of_string, lines);
+    (lines, Array.length(lines));
+  };
 
-let prepareGroup = group => {
-  let _arr = group;
-  let list = Array.to_list(group);
-  list;
-};
-
-let prepareInput2 = lines => {
-  let groups = Utils.groupInput(lines);
-  let data = Array.map(prepareGroup, groups);
-  (data, Array.length(data));
+  let groups = (fn, lines) => {
+    let groups = Utils.groupInput(lines);
+    let data = Array.map(fn, groups);
+    (data, Array.length(data));
+  };
 };
 
 /*******************
@@ -39,7 +27,7 @@ let prepareInput2 = lines => {
  *******************/
 
 let part1 = lines => {
-  let (_data, _n) = prepareInput(lines);
+  let (_data, _n) = Input.ints(lines);
   0;
 };
 
@@ -48,7 +36,7 @@ let part1 = lines => {
  *******************/
 
 let part2 = lines => {
-  let (_data, _n) = prepareInput(lines);
+  let (_data, _n) = Input.ints(lines);
   0;
 };
 
@@ -57,7 +45,7 @@ let part2 = lines => {
  *****************/
 
 let run = () => {
-  let lines = Utils.getInput("10");
+  let lines = Utils.getInput("15");
   Printf.printf("Part 1: %d\n", part1(lines));
   Printf.printf("Part 2: %d\n", part2(lines));
 };
