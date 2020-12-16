@@ -13,6 +13,11 @@ let set = (k, v, t) => {
   ();
 };
 
+let remove = (k, t) => {
+  t := Map.remove(k, t^);
+  ();
+};
+
 let get = (k, t) => {
   Map.get(k, t^);
 };
