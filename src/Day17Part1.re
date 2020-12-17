@@ -10,21 +10,15 @@ let prepareLines = lines => {
   data;
 };
 
-let encode = ((i, j, k, l)) => {
-  Print.int(i)
-  ++ ","
-  ++ Print.int(j)
-  ++ ","
-  ++ Print.int(k)
-  ++ ","
-  ++ Print.int(l);
+let encode = ((i, j, k)) => {
+  Print.int(i) ++ "," ++ Print.int(j) ++ "," ++ Print.int(k);
 };
 
 let decode = s => {
   let parts = String.split(",", s);
   let parts = Parse.intList(parts);
   let parts = Array.of_list(parts);
-  (parts[0], parts[1], parts[2], parts[3]);
+  (parts[0], parts[1], parts[2]);
 };
 
 let neighbors1 = i => [i + 1, i, i - 1];
@@ -35,17 +29,11 @@ let neighbors2 = ((i, j)) => {
   @ List.map(x => (i - 1, x), neighbors1(j));
 };
 
-let neighbors3 = ((i, j, k)) => {
-  List.map(((j, k)) => (i + 1, j, k), neighbors2((j, k)))
-  @ List.map(((j, k)) => (i, j, k), neighbors2((j, k)))
-  @ List.map(((j, k)) => (i - 1, j, k), neighbors2((j, k)));
-};
-
-let neighbors = ((i, j, k, l)) => {
+let neighbors = ((i, j, k)) => {
   let ns =
-    List.map(((j, k, l)) => (i + 1, j, k, l), neighbors3((j, k, l)))
-  @ List.map(((j, k, l)) => (i, j, k, l), neighbors3((j, k, l)))
-  @ List.map(((j, k, l)) => (i - 1, j, k, l), neighbors3((j, k, l)));
+    List.map(((j, k)) => (i + 1, j, k), neighbors2((j, k)))
+    @ List.map(((j, k)) => (i, j, k), neighbors2((j, k)))
+    @ List.map(((j, k)) => (i - 1, j, k), neighbors2((j, k)));
   List.map(encode, ns);
 };
 
@@ -96,7 +84,7 @@ let part1 = lines => {
   for (i in 0 to n - 1) {
     for (j in 0 to m - 1) {
       if (data[i][j] === '#') {
-        MMap.set(encode((i, j, 0, 0)), true, map);
+        MMap.set(encode((i, j, 0)), true, map);
       };
     };
   };
