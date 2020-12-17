@@ -97,4 +97,18 @@ describe("Past Days", ({test}) => {
     expect.int(Day11.part1(lines)).toBe(2273);
     expect.int(Day11.part2(lines)).toBe(2064);
   });
+
+  // TODO: Add missing days.
+
+  test("Day16", ({expect}) => {
+    let lines = Utils.getInput("16");
+    expect.int(Day16.part1(lines)).toBe(26869);
+    expect.int(Day16.part2(lines)).toBe(855275529001);
+  });
+
+  test("Day16Clean", ({expect}) => {
+    let lines = Utils.getInput("16");
+    expect.int(Day16Clean.part1(lines)).toBe(26869);
+    expect.int(Day16Clean.part2(lines)).toBe(855275529001);
+  });
 });

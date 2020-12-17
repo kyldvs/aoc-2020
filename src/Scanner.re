@@ -17,6 +17,12 @@ let make =
   ref(result);
 };
 
+let makeArr =
+    (~tokens: list(char)=[' ', '\n', ',', ':', '-'], lines: array(string))
+    : t => {
+  make(~tokens, Array.to_list(lines));
+};
+
 let nextLength = (l: int, t: t): string => {
   if (l <= 0) {
     failwith("Must request a postive length.");
@@ -104,4 +110,13 @@ let hasNext = (t: t): bool => {
   | [hd, ...rest] => true
   | [] => false
   };
+};
+
+let foldLeftConsuming = (fn, initial, t: t) => {
+  let curr = ref(initial);
+  while (hasNext(t)) {
+    let s = nextString(t);
+    curr := fn(curr^, s);
+  };
+  curr^;
 };

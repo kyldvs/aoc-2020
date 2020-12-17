@@ -1,79 +1,58 @@
 open Bread;
+open Tools;
 
 /*********************
  * Input preparation *
  *********************/
-
-module Input = {
-  let eachLine = (fn, lines) => {
-    let lines = Array.map(fn, lines);
-    (lines, Array.length(lines));
-  };
-
-  let ints = lines => {
-    let lines = Array.map(int_of_string, lines);
-    (lines, Array.length(lines));
-  };
-
-  let groups = (fn, lines) => {
-    let groups = Utils.groupInput(lines);
-    let data = Array.map(fn, groups);
-    (data, Array.length(data));
-  };
-};
 
 /*******************
  * Part 1 Solution *
  *******************/
 
 let part1 = lines => {
-  let groups = Utils.groupInput(lines);
-  let ranges = MList.make();
-  Array.iter(
-    line => {
-      let parts = String.split(": ", line);
-      let _key = List.hd(parts);
-      let right = String.concat("", List.tl(parts));
-      let s = Scanner.make([right]);
-      let low1 = Scanner.nextInt(s);
-      let high1 = Scanner.nextInt(s);
-      let _ = Scanner.nextString(s);
-      let low2 = Scanner.nextInt(s);
-      let high2 = Scanner.nextInt(s);
-      let inRange = i => {
-        i >= low1 && i <= high1 || i >= low2 && i <= high2;
-      };
-      MList.addFirst(inRange, ranges);
-      ();
-    },
-    groups[0],
-  );
+  let groups = Input.groups(lines);
+  groups[1] = arrayRemoveFirst(groups[1]);
+  groups[2] = arrayRemoveFirst(groups[2]);
+
+  let n = Array.length(groups[0]);
+  let ranges =
+    Array.init(
+      n,
+      i => {
+        let line = groups[0][i];
+        let parts = Input.extract("{}: {}-{} or {}-{}", line);
+        let _key = parts[0];
+        let low1 = Parse.int(parts[1]);
+        let high1 = Parse.int(parts[2]);
+        let low2 = Parse.int(parts[3]);
+        let high2 = Parse.int(parts[4]);
+        let test = x => {
+          x >= low1 && x <= high1 || x >= low2 && x <= high2;
+        };
+        test;
+      },
+    );
 
   let valid = x => {
-    List.exists(test => test(x), ranges^);
+    arraySome(test => test(x), ranges);
   };
 
-  let nearby = groups[2] |> Array.to_list;
-  let s = Scanner.make(nearby);
-  // Nearby ticket header
-  let _ = Scanner.nextString(s);
-  let _ = Scanner.nextString(s);
-
-  let sum = ref(0);
-  while (Scanner.hasNext(s)) {
-    let i = Scanner.nextInt(s);
-    if (!valid(i)) {
-      // Printf.printf("invalid: %d\n", i);
-      sum := sum^ + i;
-    };
-  };
-  sum^;
+  let scanner = Scanner.makeArr(groups[2]);
+  Scanner.foldLeftConsuming(
+    (sum, token) => {
+      let x = Parse.int(token);
+      valid(x) ? sum : sum + x;
+    },
+    0,
+    scanner,
+  );
 };
 
 /*******************
  * Part 2 Solution *
  *******************/
 
+// TODO: This is not cleaned up yet.
 let part2 = lines => {
   let groups = Utils.groupInput(lines);
   let keys = MMap.make();

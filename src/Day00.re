@@ -1,25 +1,13 @@
 open Bread;
+open Tools;
 
 /*********************
  * Input preparation *
  *********************/
 
-module Input = {
-  let eachLine = (fn, lines) => {
-    let lines = Array.map(fn, lines);
-    (lines, Array.length(lines));
-  };
-
-  let ints = (lines) => {
-    let lines = Array.map(int_of_string, lines);
-    (lines, Array.length(lines));
-  };
-
-  let groups = (fn, lines) => {
-    let groups = Utils.groupInput(lines);
-    let data = Array.map(fn, groups);
-    (data, Array.length(data));
-  };
+let prepareLines = lines => {
+  let data = Input.ints(lines);
+  data;
 };
 
 /*******************
@@ -27,8 +15,13 @@ module Input = {
  *******************/
 
 let part1 = lines => {
-  let (_data, _n) = Input.ints(lines);
-  0;
+  let data = prepareLines(lines);
+  let n = Array.length(data);
+  let sum = ref(0);
+  for (i in 0 to n - 1) {
+    sum := sum^ + data[i];
+  };
+  sum^;
 };
 
 /*******************
@@ -36,8 +29,13 @@ let part1 = lines => {
  *******************/
 
 let part2 = lines => {
-  let (_data, _n) = Input.ints(lines);
-  0;
+  let data = prepareLines(lines);
+  let n = Array.length(data);
+  let sum = ref(0);
+  for (i in 0 to n - 1) {
+    sum := sum^ + data[i];
+  };
+  sum^;
 };
 
 /*****************
@@ -45,7 +43,7 @@ let part2 = lines => {
  *****************/
 
 let run = () => {
-  let lines = Utils.getInput("15");
+  let lines = Utils.getInput("00");
   Printf.printf("Part 1: %d\n", part1(lines));
   Printf.printf("Part 2: %d\n", part2(lines));
 };
