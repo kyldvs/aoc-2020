@@ -1,4 +1,5 @@
 open Aoc;
+open Bread;
 open TestFramework;
 open Tools;
 
@@ -58,5 +59,90 @@ describe("Tools", ({test}) => {
       "Hello Alice, Bob, and Carla! We hope you have a nice day....",
     |];
     expect.fn(() => Input.extractLines(s, lines)).toThrow();
+  });
+
+  test("RPN 1", ({expect}) => {
+    module RPN =
+      RPN.Make({
+        let config =
+          Map.fromList([
+            ("+", (1, RPN.Left, (+))),
+            ("*", (1, RPN.Left, ( * ))),
+          ]);
+      });
+
+    let run = s =>
+      s
+      |> String.replaceAll("(", "( ")
+      |> String.replaceAll(")", " )")
+      |> String.split(" ")
+      |> RPN.parse
+      |> RPN.solve;
+
+    expect.int(run("1 + 2")).toBe(3);
+    expect.int(run("1 + 2 * 3")).toBe(9);
+    expect.int(run("1 + 2 * 3 + 4 * 5 + 6")).toBe(71);
+    expect.int(run("2 * 3 + (4 * 5)")).toBe(26);
+    expect.int(run("5 + (8 * 3 + 9 + 3 * 4 * 3)")).toBe(437);
+    expect.int(run("5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))")).toBe(
+      12240,
+    );
+    expect.int(run("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2")).toBe(
+      13632,
+    );
+  });
+
+  test("RPN 2", ({expect}) => {
+    module RPN =
+      RPN.Make({
+        let config =
+          Map.fromList([
+            ("+", (2, RPN.Left, (+))),
+            ("*", (1, RPN.Left, ( * ))),
+          ]);
+      });
+
+    let run = s =>
+      s
+      |> String.replaceAll("(", "( ")
+      |> String.replaceAll(")", " )")
+      |> String.split(" ")
+      |> RPN.parse
+      |> RPN.solve;
+
+    expect.int(run("1 + 2")).toBe(3);
+    expect.int(run("1 + 2 * 3")).toBe(9);
+    expect.int(run("1 + 2 * 3 + 4 * 5 + 6")).toBe(231);
+    expect.int(run("1 + (2 * 3) + (4 * (5 + 6))")).toBe(51);
+    expect.int(run("2 * 3 + (4 * 5)")).toBe(46);
+    expect.int(run("5 + (8 * 3 + 9 + 3 * 4 * 3)")).toBe(1445);
+    expect.int(run("5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))")).toBe(
+      669060,
+    );
+    expect.int(run("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2")).toBe(
+      23340,
+    );
+  });
+
+  test("RPN 3", ({expect}) => {
+    module RPN =
+      RPN.Make({
+        let config =
+          Map.fromList([
+            ("+", (1, RPN.Left, (+))),
+            ("-", (1, RPN.Left, (-))),
+          ]);
+      });
+
+    let run = s =>
+      s
+      |> String.replaceAll("(", "( ")
+      |> String.replaceAll(")", " )")
+      |> String.split(" ")
+      |> RPN.run;
+
+    expect.int(run("1 + 2 - 3")).toBe(0);
+    expect.int(run("1 - 2 + 3")).toBe(2);
+    expect.int(run("10 - 20 + 30 - 40 + 50 - 60")).toBe(-30);
   });
 });
