@@ -282,37 +282,30 @@ module RPN = {
     };
 
     let solve = parsed => {
-      let n = ref(0);
-      let values = ref([]);
-      List.iter(
-        out => {
-          switch (out) {
-          | Int(value) =>
-            values := [value, ...values^];
-            incr(n);
-          | Op(_key, op) =>
-            if (n^ < 2) {
-              failwith(
-                "Invalid equation. Not enough values for next operator.",
-              );
-            };
-            let b = List.hd(values^);
-            let a = List.hd(List.tl(values^));
-            let next = op(a, b);
-            values := [next, ...List.tl(List.tl(values^))];
-            decr(n);
-          }
-        },
-        parsed,
-      );
-
-      if (n^ != 1) {
-        failwith(
-          "Invalid equation. Did not resolve to single value. Not enough operators.",
+      let values =
+        List.fold_left(
+          (values, out) => {
+            switch (out) {
+            | Int(value) => [value, ...values]
+            | Op(_key, op) =>
+              switch (values) {
+              | [b, a, ...rest] => [op(a, b), ...rest]
+              | _ => failwith("Invalid. Not enough values for next operator.")
+              }
+            }
+          },
+          [],
+          parsed,
         );
-      };
 
-      List.hd(values^);
+      switch (values) {
+      | [] => failwith("Invalid. Empty equation given.")
+      | [value] => value
+      | _ =>
+        failwith(
+          "Invalid. Did not resolve to single value. Not enough operators.",
+        )
+      };
     };
 
     let run = s => solve(parse(s));
