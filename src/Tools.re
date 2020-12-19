@@ -41,6 +41,7 @@ module Parse = {
   let int = int_of_string;
   let bool = bool_of_string;
   let intList = List.map(int_of_string);
+  let intArr = Array.map(int_of_string);
 };
 
 module Input = {
