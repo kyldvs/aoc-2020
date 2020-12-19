@@ -1,21 +1,23 @@
-module Config = DequeCore;
-
 type t('el) = DequeCore.t('el);
 
+let make = DequeCore.make;
+let isEmpty = DequeCore.isEmpty;
+let length = DequeCore.length;
+
 let init = (count, f) =>
-  Caml.Array.init(count, f) |> CamlArrayCore.toList |> Config.fromList;
+  Caml.Array.init(count, f) |> CamlArrayCore.toList |> DequeCore.fromList;
 
-let toCamlList = ds => ds |> Config.toList |> CamlListCore.fromList;
-let fromCamlList = ds => ds |> CamlListCore.toList |> Config.fromList;
+let toCamlList = ds => ds |> DequeCore.toList |> CamlListCore.fromList;
+let fromCamlList = ds => ds |> CamlListCore.toList |> DequeCore.fromList;
 
-let toCamlArray = ds => ds |> Config.toList |> CamlArrayCore.fromList;
-let fromCamlArray = ds => ds |> CamlArrayCore.toList |> Config.fromList;
+let toCamlArray = ds => ds |> DequeCore.toList |> CamlArrayCore.fromList;
+let fromCamlArray = ds => ds |> CamlArrayCore.toList |> DequeCore.fromList;
 
-let toDeque = ds => ds |> Config.toList |> DequeCore.fromList;
-let fromDeque = ds => ds |> DequeCore.toList |> Config.fromList;
+let toDeque = ds => ds |> DequeCore.toList |> DequeCore.fromList;
+let fromDeque = ds => ds |> DequeCore.toList |> DequeCore.fromList;
 
 let everyi = (fn, ds) => {
-  let list = Config.toList(ds);
+  let list = DequeCore.toList(ds);
   let list = ref(list);
   let result = ref(true);
   let i = ref(0);
@@ -36,7 +38,7 @@ let everyi = (fn, ds) => {
 let every = (fn, ds) => everyi((i, el) => fn(el), ds);
 
 let somei = (fn, ds) => {
-  let list = Config.toList(ds);
+  let list = DequeCore.toList(ds);
   let list = ref(list);
   let result = ref(false);
   let i = ref(0);
@@ -61,16 +63,16 @@ let nonei = (fn, ds) => everyi((i, el) => !fn(i, el), ds);
 let none = (fn, ds) => nonei((i, el) => fn(el), ds);
 
 let forEachi = (fn, ds) => {
-  let list = Config.toList(ds);
+  let list = DequeCore.toList(ds);
   Caml.List.iteri(fn, list);
 };
 
 let forEach = (fn, ds) => forEachi((i, el) => fn(el), ds);
 
-let reverse = Config.reverse;
+let reverse = DequeCore.reverse;
 
 let reducei = (fn, initialValue, ds) => {
-  let list = Config.toList(ds);
+  let list = DequeCore.toList(ds);
   let list = ref(list);
   let result = ref(initialValue);
   let i = ref(0);
@@ -90,7 +92,7 @@ let reduce = (fn, initialValue, ds) =>
   reducei((acc, i, el) => fn(acc, el), initialValue, ds);
 
 let reduceReversei = (fn, initialValue, ds) => {
-  let list = Config.toList(ds);
+  let list = DequeCore.toList(ds);
   let list = Caml.List.rev(list);
   let list = ref(list);
   let result = ref(initialValue);
@@ -112,15 +114,15 @@ let reduceReverse = (fn, initialValue, ds) =>
   reduceReversei((acc, i, el) => fn(acc, el), initialValue, ds);
 
 let mapi = (fn, ds) => {
-  let list = Config.toList(ds);
+  let list = DequeCore.toList(ds);
   let list = Caml.List.mapi(fn, list);
-  Config.fromList(list);
+  DequeCore.fromList(list);
 };
 
 let map = (fn, ds) => mapi((i, el) => fn(el), ds);
 
 let filterKeepi = (fn, ds) => {
-  let list = Config.toList(ds);
+  let list = DequeCore.toList(ds);
   let list = ref(list);
   let resultRev = ref([]);
   let i = ref(0);
@@ -135,7 +137,7 @@ let filterKeepi = (fn, ds) => {
     | _ => raise(Exceptions.InternalError("FeatureSequence.filterKeepi"))
     };
   };
-  resultRev^ |> Caml.List.rev |> Config.fromList;
+  resultRev^ |> Caml.List.rev |> DequeCore.fromList;
 };
 
 let filterKeep = (fn, ds) => filterKeepi((i, el) => fn(el), ds);
@@ -233,9 +235,9 @@ let getFirstNExn = (count, ds) => {
   let result = ref([]);
   for (_i in 0 to count - 1) {
     result := [getFirstExn(ds^), ...result^];
-    ds := Config.dropFirstExn(ds^);
+    ds := DequeCore.dropFirstExn(ds^);
   };
-  result^ |> Caml.List.rev |> Config.fromList;
+  result^ |> Caml.List.rev |> DequeCore.fromList;
 };
 
 let getFirstN = (count, ds) =>
@@ -243,7 +245,7 @@ let getFirstN = (count, ds) =>
   | _ => None
   };
 
-let dropFirstExn = Config.dropFirstExn;
+let dropFirstExn = DequeCore.dropFirstExn;
 
 let dropFirstNExn = (count, ds) => {
   let ds = ref(ds);
@@ -266,10 +268,10 @@ let dropFirst = ds =>
 let addFirst = DequeCore.addFirst;
 
 let removeFirstExn = ds => {
-  let list = Config.toList(ds);
+  let list = DequeCore.toList(ds);
   switch (list) {
   | [] => raise(Exceptions.Empty("FeatureFront.removeFirstExn"))
-  | [_, ...rest] => Config.fromList(rest)
+  | [_, ...rest] => DequeCore.fromList(rest)
   };
 };
 
@@ -292,7 +294,7 @@ let removeFirst = ds =>
   };
 
 let updateFirstExn = (fn, ds) =>
-  if (Config.isEmpty(ds)) {
+  if (DequeCore.isEmpty(ds)) {
     raise(Exceptions.Empty("FeatureFront.updateFirstExn"));
   } else {
     let first = getFirstExn(ds);
@@ -306,7 +308,7 @@ let updateFirst = (fn, ds) =>
   | _ => None
   };
 
-let getLastExn = Config.getLastExn;
+let getLastExn = DequeCore.getLastExn;
 
 let getLast = ds =>
   try(Some(getLastExn(ds))) {
@@ -318,9 +320,9 @@ let getLastNExn = (count, ds) => {
   let result = ref([]);
   for (i in 0 to count - 1) {
     result := [getLastExn(ds^), ...result^];
-    ds := Config.removeLastExn(ds^);
+    ds := DequeCore.removeLastExn(ds^);
   };
-  result^ |> Config.fromList;
+  result^ |> DequeCore.fromList;
 };
 
 let getLastN = (count, ds) =>
@@ -328,9 +330,9 @@ let getLastN = (count, ds) =>
   | _ => None
   };
 
-let addLast = Config.addLast;
+let addLast = DequeCore.addLast;
 
-let removeLastExn = Config.removeLastExn;
+let removeLastExn = DequeCore.removeLastExn;
 
 let removeLastNExn = (count, ds) => {
   let ds = ref(ds);
@@ -351,7 +353,7 @@ let removeLast = ds =>
   };
 
 let updateLastExn = (fn, ds) =>
-  if (Config.isEmpty(ds)) {
+  if (DequeCore.isEmpty(ds)) {
     raise(Exceptions.Empty("FeatureBack.updateLastExn"));
   } else {
     let first = getLastExn(ds);

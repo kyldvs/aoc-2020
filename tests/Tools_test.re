@@ -145,4 +145,15 @@ describe("Tools", ({test}) => {
     expect.int(run("1 - 2 + 3")).toBe(2);
     expect.int(run("10 - 20 + 30 - 40 + 50 - 60")).toBe(-30);
   });
+
+  test("Deque", ({expect}) => {
+    let d =
+      Deque.make()
+      |> Deque.addFirst(1)
+      |> Deque.addFirst(0)
+      |> Deque.addLast(2)
+      |> Deque.addLast(3);
+
+    expect.list(Deque.toCamlList(d)).toEqual([0, 1, 2, 3]);
+  });
 });

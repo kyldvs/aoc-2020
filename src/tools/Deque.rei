@@ -1,5 +1,9 @@
 type t('el);
 
+let make: unit => t('el);
+let isEmpty: t('el) => bool;
+let length: t('el) => int;
+
 let init: (int, int => 'el) => t('el);
 
 let toCamlList: t('el) => CamlListCore.t('el);
