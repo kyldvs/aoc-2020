@@ -34,6 +34,7 @@ let arrayRemoveFirst = arr => arr |> Array.to_list |> List.tl |> Array.of_list;
 
 module Print = {
   let int = string_of_int;
+  let intList = l => String.join(", ", List.map(int, l));
   let bool = string_of_bool;
 };
 

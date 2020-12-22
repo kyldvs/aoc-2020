@@ -17,7 +17,6 @@ let prepareLines = lines => {
       parts => {
         let ingredients = String.split(" ", parts[0]) |> Set.fromList;
         let allergys = String.split(", ", parts[1]) |> Set.fromList;
-        let _ = parts[2];
         {ingredients, allergys};
       },
       data,
