@@ -1,8 +1,8 @@
 (library
   (name Aoc)
   (public_name aoc)
-  (ocamlc_flags -w -9-27)
-  (ocamlopt_flags -linkall -w -9-27)
+  (ocamlopt_flags -g -linkall -w -9-27-33-35)
+  (ocamlc_flags -w -9-27-33-35)
   (libraries
     bread
     fp

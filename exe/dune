@@ -2,12 +2,12 @@
   (name Exe)
   (public_name exe)
   (package exe)
-  (ocamlc_flags -w -9-27)
-  (ocamlopt_flags -w -9-27)
+  (ocamlopt_flags -g -w -9-27-33-35)
+  (ocamlc_flags -g -w -9-27-33-35)
   (libraries
     bread
     aoc
-  )  
+  )
 )
 
 (include_subdirs unqualified)

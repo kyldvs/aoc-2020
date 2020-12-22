@@ -4,7 +4,13 @@
   "description": "aoc",
   "license": "MIT",
   "esy": {
-    "build": "refmterr dune build -p aoc"
+    "build": "refmterr dune build -p aoc",
+    "exportedEnv": {
+      "OCAMLRUNPARAM": {
+        "val": "b",
+        "scope": "global"
+      }
+    }
   },
   "scripts": {
     "format": "esy dune build @fmt --auto-promote",

@@ -1,3 +1,5 @@
+[@ocaml.warning "-32"];
+
 type t('el) = DequeCore.t('el);
 
 let make = DequeCore.make;
