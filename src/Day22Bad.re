@@ -74,7 +74,7 @@ let part2 = lines => {
   let (p1, p2) = prepareLines(lines);
 
   // Encode the game into a string to prevent infinite recursion.
-  let en = (l1, l2) => Print.intList(l1) ++ "|" ++ Print.intList(l2);
+  let en = (l1, l2) => Print.intList(l1 @ l2);
 
   // Some debugging to help print things out.
   let game = ref(1);
@@ -88,8 +88,6 @@ let part2 = lines => {
   };
 
   let latestWinner = ref([]);
-  let seen = ref(0);
-
   let rec getWinner = (game, debugLen, debugSum, p1, p2, v) => {
     ();
 
@@ -103,11 +101,8 @@ let part2 = lines => {
       failwith("Sums changed!");
     };
 
-    // printf("  P1: [%s]\n", Print.intList(p1));
-    // printf("  P2: [%s]\n", Print.intList(p2));
+    // printf("  P1 %s\n", Print.intList(p1));
     if (Set.has(en(p1, p2), v)) {
-      printf("  Already seen: [%s]\n", en(p1, p2));
-      incr(seen);
       debugEndGame(game);
       latestWinner := p1;
       1;
@@ -154,7 +149,7 @@ let part2 = lines => {
             let id =
               getWinner(
                 debugStartGame(),
-                f1 + f2,
+                List.length(p1Sub) + List.length(p2Sub),
                 listSum(p1Sub) + listSum(p2Sub),
                 p1Sub,
                 p2Sub,
@@ -188,13 +183,9 @@ let part2 = lines => {
       Set.empty,
     );
 
-  printf("Seen: %d\n", seen^);
-
   // This will contain the deck of the most recent winner, which will be
   // after the first recursive call ends, Game 1 in this case.
   let winner = latestWinner^;
-
-  print_endline(Print.intList(winner));
 
   // Add up the score for the winner.
   let m = ref(1);
@@ -214,7 +205,7 @@ let part2 = lines => {
  *****************/
 
 let run = () => {
-  let lines = Utils.getInput("22");
+  let lines = Utils.getInput("22.test3");
   Printf.printf("Part 1: %d\n", part1(lines));
   Printf.printf("Part 2: %d\n", part2(lines));
 };
