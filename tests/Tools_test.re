@@ -156,4 +156,15 @@ describe("Tools", ({test}) => {
 
     expect.list(Deque.toCamlList(d)).toEqual([0, 1, 2, 3]);
   });
+
+  test("Linked List", ({expect}) => {
+    let l = LinkedList.make();
+    let p = () => LinkedList.print(~max=100, string_of_int, l);
+
+    LinkedList.addLast(0, l);
+    LinkedList.addLast(1, l);
+    LinkedList.addLast(2, l);
+
+    expect.string(p()).toEqual("[0, 1, 2]");
+  });
 });
