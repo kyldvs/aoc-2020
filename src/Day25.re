@@ -16,12 +16,41 @@ let prepareLines = lines => {
 
 let part1 = lines => {
   let data = prepareLines(lines);
-  let n = Array.length(data);
-  let sum = ref(0);
-  for (i in 0 to n - 1) {
-    sum := sum^ + data[i];
+
+  let cardLoopSize = ref(0);
+  let card = ref(1);
+  while (card^ !== data[0]) {
+    incr(cardLoopSize);
+    card := card^ * 7 mod 20201227;
+    // printf("card: %d\n", card^);
+    // printf("cardLoopSize: %d\n", cardLoopSize^);
+    // flush_all();
   };
-  sum^;
+
+  printf("card: %d\n", card^);
+  printf("cardLoopSize: %d\n", cardLoopSize^);
+  flush_all();
+
+  let doorLoopSize = ref(0);
+  let door = ref(1);
+  while (door^ !== data[1]) {
+    incr(doorLoopSize);
+    door := door^ * 7 mod 20201227;
+    // printf("door: %d\n", door^);
+    // printf("doorLoopSize: %d\n", doorLoopSize^);
+    // flush_all();
+  };
+
+  printf("door: %d\n", door^);
+  printf("doorLoopSize: %d\n", doorLoopSize^);
+  flush_all();
+
+  let eKey = ref(1);
+  for (i in 1 to doorLoopSize^) {
+    eKey := eKey^ * data[0] mod 20201227;
+  };
+
+  eKey^;
 };
 
 /*******************
